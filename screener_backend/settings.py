@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -79,14 +80,13 @@ WSGI_APPLICATION = 'screener_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'resume_db',
-        'USER': 'root',
-        'PASSWORD': '123',
-        'HOST': 'localhost',
+        'NAME': os.environ.get('DB_NAME', 'resume_db'),
+        'USER': os.environ.get('DB_USER', 'root'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', '123'),
+        'HOST': os.environ.get('DB_HOST', 'db'),
         'PORT': '3306',
     }
 }
-
 
 
 # Password validation
